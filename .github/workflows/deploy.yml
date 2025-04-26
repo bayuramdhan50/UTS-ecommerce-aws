@@ -29,4 +29,6 @@ jobs:
           rm -rf UTS-ecommerce-aws
           git clone https://github.com/bayuramdhan50/UTS-ecommerce-aws.git
           cd UTS-ecommerce-aws
-          sudo python3 app.py
+          sudo pkill -f app.py || true
+          nohup python3 app.py &
+
