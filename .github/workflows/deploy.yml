@@ -13,9 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-
     - name: Run unit tests
       run: |
         echo "Running tests..."
@@ -32,6 +29,4 @@ jobs:
           rm -rf UTS-ecommerce-aws
           git clone https://github.com/bayuramdhan50/UTS-ecommerce-aws.git
           cd UTS-ecommerce-aws
-          pip3 install -r requirements.txt
-          sudo pkill -f app.py || true
-          nohup python3 app.py &
+          sudo python3 app.py
