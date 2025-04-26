@@ -29,7 +29,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           cd /home/ec2-user/
-          rm -rf ecommerce-app
+          rm -rf UTS-ecommerce-aws
           git clone https://github.com/bayuramdhan50/UTS-ecommerce-aws.git
           cd UTS-ecommerce-aws
           pip3 install -r requirements.txt
