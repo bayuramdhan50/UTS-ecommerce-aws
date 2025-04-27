@@ -20,23 +20,23 @@ jobs:
 
       - name: Deploy to EC2 🚀
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            sudo yum update -y
-            sudo yum install -y git python3
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ec2-user/
+            sudo yum update -y
+            sudo yum install -y git python3 -y
 
-            # Kalau folder sudah ada, masuk dan git pull
-            if [ -d "UTS-ecommerce-aws" ]; then
-              cd UTS-ecommerce-aws
-              git pull origin main
-            else
-              git clone https://github.com/bayuramdhan50/UTS-ecommerce-aws.git
-              cd UTS-ecommerce-aws
-            fi
+            # Remove repo lama
+            rm -rf UTS-ecommerce-aws
 
-            # Kill app.py jika masih jalan
+            # Clone repo terbaru
+            git clone https://github.com/bayuramdhan50/UTS-ecommerce-aws.git
+            cd UTS-ecommerce-aws
+
+            # Kill app.py lama
             sudo pkill -f app.py || true
 
-            # Start ulang
-            nohup python3 app.py > output.log 2>&1 &
+            # Jalanin app.py baru di background
+            sudo nohup python3 app.py > output.log 2>&1 &
           EOF
+            echo "Deployment completed successfully!"
+
