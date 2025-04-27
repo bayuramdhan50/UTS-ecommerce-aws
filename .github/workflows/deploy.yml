@@ -24,6 +24,8 @@ jobs:
         host: ${{ secrets.EC2_PUBLIC_IP }}
         username: ec2-user
         key: ${{ secrets.EC2_SSH_KEY }}
+        timeout: 60
+        script_timeout: 60
         script: |
           sudo yum update -y
           sudo yum install -y git python3
@@ -33,3 +35,4 @@ jobs:
           cd UTS-ecommerce-aws
           sudo pkill -f app.py || true
           sudo nohup python3 app.py > output.log 2>&1 &
+
