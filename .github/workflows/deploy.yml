@@ -30,5 +30,8 @@ jobs:
           git clone https://github.com/bayuramdhan50/UTS-ecommerce-aws.git
           cd UTS-ecommerce-aws
           sudo pkill -f app.py || true
-          nohup python3 app.py &
+          nohup python3 app.py > output.log 2>&1 &
+          sleep 5
+          echo "Deployment done."
+
 
