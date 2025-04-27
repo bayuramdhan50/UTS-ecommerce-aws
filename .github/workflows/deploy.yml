@@ -25,6 +25,8 @@ jobs:
         username: ec2-user
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
+          sudo yum update -y
+          sudo yum install git -y
           cd /home/ec2-user/
           rm -rf UTS-ecommerce-aws
           git clone https://github.com/bayuramdhan50/UTS-ecommerce-aws.git
@@ -33,5 +35,3 @@ jobs:
           nohup python3 app.py > output.log 2>&1 &
           sleep 5
           echo "Deployment done."
-
-
